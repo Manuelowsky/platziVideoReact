@@ -56,6 +56,19 @@ module.exports = {
                 'css-loader',
                 'sass-loader'
             ]
+        }, {
+            //Test para saber que tipo de extensiones vamos a utilizar
+            //Utiliza archivos con extensiones png gif o jpg
+            test: /\.(png|gif|jpg)$/,
+            //Pasar internamente el loader que utilizaremos
+            use: [{
+                loader: "file-loader",
+                //Configuraciones
+                options: {
+                    //Nombre del archivo de salida
+                    name: 'assets/[hash].[ext]'
+                }
+            }]
         }]
     },
     plugins: [

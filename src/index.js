@@ -2,7 +2,7 @@
 import React from 'react';
 //Importando React-dom
 import ReactDOM from 'react-dom';
-//Importando componente HelloWorld
-import HelloWorld from './components/HelloWorld';
+//Importando componente App
+import App from './containers/App';
 
-ReactDOM.render(<HelloWorld />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))

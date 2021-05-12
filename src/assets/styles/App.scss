@@ -1,4 +1,17 @@
+//Importando archivo de variables
+@import "./Vars.scss";
+//Importando archivo de mediaQueries
+@import "./Media.scss";
 body {
     margin: 0;
-    background-color: red;
+    font-family: $themeFont;
+    background: $mainColor;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
