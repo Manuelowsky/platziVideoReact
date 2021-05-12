@@ -1,5 +1,5 @@
 //Importando React
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 //Importando componente Header
 import Header from '../components/Header';
 //Importando componente Search
@@ -12,35 +12,63 @@ import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 //Importando componente Footer
 import Footer from '../components/Footer';
+//Importando el custom hook
+import useInitialState from '../hooks/useInitialState';
 
 //Importando Styles
 import '../assets/styles/App.scss';
 
+const API='http://localhost:3000/initialState/';
+
 //Creando componente
 const App = () => {
+    const initialState=useInitialState(API);
+
     return ( 
         <div className="App">
             <Header />
             <Search />
 
-            <Categories
-                title='Mi lista'
-            >
-                <Carousel>
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
-                </Carousel>
-            </Categories>
-
+            {
+                //Validando si la lista de videos es mayot a 0
+                initialState.mylist.length > 0 
+                ?
+                    <Categories
+                        title='Mi lista'
+                    >
+                        <Carousel>
+                            {
+                                //Mapeo para tener la informacion de cada video
+                                initialState.mylist.map(item=>(
+                                    <CarouselItem 
+                                        //Key para identificarlo
+                                        key={item.id}
+                                        {...item}
+                                    />
+                                ))
+                            }
+                            <CarouselItem />
+                        </Carousel>
+                    </Categories>
+                :
+                    null
+            }
+        
             <Categories
                 title='Tendencias'
             >
                 <Carousel>
-                    <CarouselItem />
-                    <CarouselItem />
-                    <CarouselItem />
+                    {
+                        //Mapeo para tener la informacion de cada video
+                        initialState.trends.map(item=>(
+                            <CarouselItem 
+                                //Key para identificarlo
+                                key={item.id}
+                                {...item}
+                            />
+                        ))
+                    }
+                    
                 </Carousel>
             </Categories>
 
@@ -48,8 +76,16 @@ const App = () => {
                 title='Originales de Platzi Video'
             >
                 <Carousel>
-                    <CarouselItem />
-                    <CarouselItem />
+                    {
+                        //Mapeo para tener la informacion de cada video
+                        initialState.originals.map(item=>(
+                            <CarouselItem 
+                                //Key para identificarlo
+                                key={item.id}
+                                {...item}
+                            />
+                        ))
+                    }
                 </Carousel>
             </Categories>
 
